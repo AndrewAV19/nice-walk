@@ -25,20 +25,6 @@ export const STOPS: Stop[] = [
   },
   {
     id: 2,
-    icon: "💫",
-    location: "El lugar de la Casualidad",
-    clue: "Un día, nuestro lugar de siempre cerró sus puertas. Y sin saberlo, el destino nos llevó a descubrir algo mejor. Un lugar que ahora también es nuestro.",
-    hint: "Ese lugar al que llegamos por casualidad y que terminó gustándonos más de lo que imaginábamos. Hoy nos espera otra vez.",
-    type: "choice",
-    choiceQ: "Y hoy... ¿qué antojo tienes? 😋",
-    choices: ["🍔 ¡Hamburguesa!", "🥩 ¡Un corte!"],
-    choiceResponses: [
-      "¡Hamburguesa! Perfecta elección. Ahí te espero con tu orden favorita ❤️",
-      "¡Corte! Excelente gusto. Te espero con la mejor mesa del lugar ❤️",
-    ],
-  },
-  {
-    id: 3,
     icon: "🔎",
     location: "El lugar del misterio",
     clue: "Hay un lugar donde siempre pides algo frío, algo que te hace sonreír desde el primer sorbo. Cada vez que vamos, tus ojos brillan igual que la primera vez. Estoy seguro de que sabes a dónde ir.",
@@ -56,6 +42,23 @@ export const STOPS: Stop[] = [
     ],
     successMsg:
       "¡Exacto! Esa bebida que tanto te gusta te está esperando ahí. ☕✨",
+  },
+  {
+    id: 3,
+    icon: "🎟️",
+    location: "Cupón especial",
+    clue: "Hoy tienes un cupón especial. Puedes cambiarlo por algo que te guste mucho. Puede ser ir a un restaurante, o también algo más casual como pizza, tacos, alitas o cualquier antojo que tengas. Hoy tú decides.",
+    hint: "Piensa si quieres algo tranquilo en un restaurante… o algo rico que simplemente se te antoje mucho.",
+    type: "choice",
+    choiceQ: "¿Qué prefieres hoy?",
+    choices: [
+      "🍽️ Ir a un restaurante",
+      "🍕 Algo que se me antoje (pizza, tacos, buffalo, etc.)",
+    ],
+    choiceResponses: [
+      "Perfecto, entonces iremos a un restaurante. Hoy te toca elegir el lugar.",
+      "Perfecto, entonces vamos por ese antojo que tienes. Hoy el cupón lo paga todo.",
+    ],
   },
   {
     id: 4,
