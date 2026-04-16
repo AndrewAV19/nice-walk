@@ -8,6 +8,7 @@ import ProgressSection from './components/ProgressSection';
 import CluesContainer from './components/CluesContainer';
 import PetalsBackground from './components/PetalsBackground';
 import { loadState, saveState } from './utils/storage';
+import CountdownGate from './components/CountdownGate';
 
 const App: React.FC = () => {
   const [unlocked, setUnlocked] = useState<boolean[]>(() => loadState('unlocked', [true, false, false, false, false]));
@@ -15,7 +16,11 @@ const App: React.FC = () => {
   const [choices, setChoices] = useState<Record<number, number>>(() => loadState('choices', {}));
   const [riddleDone, setRiddleDone] = useState<boolean>(() => loadState('riddle', false));
   const [adminOpen, setAdminOpen] = useState<boolean>(false);
+  const TARGET_DATE = new Date('2026-04-18T13:00:00');
 
+  const [isUnlockedByTime, setIsUnlockedByTime] = useState(
+    new Date() >= TARGET_DATE
+  );
   useEffect(() => {
     saveState('unlocked', unlocked);
   }, [unlocked]);
@@ -39,12 +44,19 @@ const App: React.FC = () => {
   };
 
   const doArrive = (index: number) => {
-    if (!arrived.includes(index)) {
-      setArrived([...arrived, index]);
-      burstPetals();
-    }
-  };
+  if (!arrived.includes(index)) {
+    const newArrived = [...arrived, index];
+    setArrived(newArrived);
 
+    const newUnlocked = [...unlocked];
+    if (index + 1 < STOPS.length) {
+      newUnlocked[index + 1] = true;
+    }
+    setUnlocked(newUnlocked);
+
+    burstPetals();
+  }
+};
   const makeChoice = (stopIndex: number, choiceIndex: number) => {
     setChoices({ ...choices, [stopIndex]: choiceIndex });
     burstPetals();
@@ -100,6 +112,18 @@ const App: React.FC = () => {
       setTimeout(() => showHearts(), 400);
     }
   }, [arrived]);
+
+  if (!isUnlockedByTime) {
+  return (
+    <>
+      <PetalsBackground />
+      <CountdownGate 
+        targetDate={TARGET_DATE}
+        onUnlock={() => setIsUnlockedByTime(true)}
+      />
+    </>
+  );
+}
 
   return (
     <>
